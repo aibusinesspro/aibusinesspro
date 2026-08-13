@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>AI Business Pro · Former. Créer. Développer. Transformer.</title>
+  <meta name="description" content="AI Business Pro accompagne les entrepreneurs avec l'IA : formation 5 jours, accompagnement, recrutement. 70% pratique. Kinshasa, RDC.">
+  <meta property="og:title" content="AI Business Pro · Intelligence Artificielle pour Entrepreneurs">
+  <meta property="og:description" content="Formation intensive, accompagnement et recrutement. Transformez l'IA en levier business.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+
+  <!-- Bootstrap 5 + icônes + AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    /* ------- RESET & BASE ------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0b0d1a;
+      color: #eef2f8;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    ::-webkit-scrollbar { width: 6px; background: #12162a; }
+    ::-webkit-scrollbar-thumb { background: #3b4f9e; border-radius: 12px; }
+
+    h1, h2, h3, h4, .fw-700 { font-weight: 700; letter-spacing: -0.02em; }
+    .text-gradient {
+      background: linear-gradient(135deg, #8ab4ff, #b47aff, #6dd5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-gradient-cyan { background: linear-gradient(135deg, #6dd5fa, #3b8cff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ------- SPLASH SCREEN ------- */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #060812;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+    }
+    #splash.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    #splash .logo-splash {
+      width: 150px;
+      height: auto;
+      filter: drop-shadow(0 0 50px rgba(70, 130, 255, 0.4));
+      animation: pulseGlow 2.6s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { filter: drop-shadow(0 0 25px rgba(70, 130, 255, 0.2)); transform: scale(1); }
+      100% { filter: drop-shadow(0 0 70px rgba(100, 180, 255, 0.7)); transform: scale(1.03); }
+    }
+    #splash h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-top: 1.2rem;
+      background: linear-gradient(135deg, #eef2f8, #a0c8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+    }
+    #splash .slogan {
+      font-size: 1.4rem;
+      letter-spacing: 6px;
+      color: #7e9ad0;
+      opacity: 0;
+      animation: fadeUp 1s 1s forwards;
+    }
+    @keyframes fadeUp { 0% { opacity:0; transform:translateY(24px); } 100% { opacity:1; transform:translateY(0); } }
+
+    /* ------- LANGUAGE SWITCH ------- */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9998;
+      background: rgba(10, 14, 30, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 6px 12px;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      gap: 6px;
+      font-size: 0.8rem;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: none;
+      color: #a0b8e0;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .lang-switch button.active {
+      background: rgba(43, 92, 255, 0.25);
+      color: #fff;
+    }
+    .lang-switch button:hover { color: #fff; }
+
+    /* ------- NAVBAR ------- */
+    .navbar-custom {
+      background: rgba(11, 13, 26, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      transition: all 0.3s ease;
+      padding: 12px 0;
+    }
+    .navbar-custom.scrolled {
+      background: rgba(8, 10, 22, 0.88);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      border-bottom: 1px solid rgba(70, 130, 255, 0.15);
+    }
+    .navbar-custom .navbar-brand img { height: 40px; transition: 0.3s; }
+    .navbar-custom .nav-link {
+      color: #c8d6f0 !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.6rem 1.2rem !important;
+      border-radius: 40px;
+      transition: 0.25s;
+      position: relative;
+    }
+    .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active {
+      color: #fff !important;
+      background: rgba(60, 120, 255, 0.12);
+    }
+    .navbar-custom .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: #6d9aff;
+      transition: 0.3s;
+    }
+    .navbar-custom .nav-link:hover::after { width: 40%; }
+    .navbar-toggler {
+      border: none;
+      color: #b0c8ff;
+      font-size: 1.8rem;
+    }
+    .navbar-toggler:focus { box-shadow: none; }
+
+    /* ------- BUTTONS ------- */
+    .btn-premium {
+      background: linear-gradient(135deg, #2b5cff, #8b5cf6);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 40px;
+      border-radius: 60px;
+      transition: 0.3s ease;
+      box-shadow: 0 8px 30px rgba(43, 92, 255, 0.25);
+      letter-spacing: 0.3px;
+    }
+    .btn-premium:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 50px rgba(43, 92, 255, 0.45);
+      color: #fff;
+      background: linear-gradient(135deg, #1e4eff, #7a4cf0);
+    }
+    .btn-outline-premium {
+      background: transparent;
+      border: 1.5px solid rgba(120, 170, 255, 0.5);
+      color: #d0e0ff;
+      font-weight: 600;
+      padding: 14px 40px;
+      border-radius: 60px;
+      transition: 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .btn-outline-premium:hover {
+      background: rgba(43, 92, 255, 0.15);
+      border-color: #6d9aff;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(43,92,255,0.2);
+    }
+    .btn-wa {
+      background: #25D366;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 32px;
+      border-radius: 60px;
+      transition: 0.25s;
+    }
+    .btn-wa:hover { background: #1ebd5e; transform: scale(1.02); color:#fff; }
+
+    /* ------- HERO ------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 120px 0 80px;
+      background: radial-gradient(circle at 30% 40%, #141b3a 0%, #080b1a 80%);
+      overflow: hidden;
+    }
+    .hero-bg-glow {
+      position: absolute;
+      width: 70vw;
+      height: 70vw;
+      background: radial-gradient(circle, rgba(60, 130, 255, 0.08) 0%, transparent 70%);
+      top: -20%;
+      right: -20%;
+      pointer-events: none;
+    }
+    .hero h1 { font-size: 3.8rem; line-height: 1.1; }
+    @media (max-width:768px) { .hero h1 { font-size: 2.6rem; } }
+
+    /* ------- CARDS & SECTIONS ------- */
+    .section-pad { padding: 90px 0; }
+    .section-title { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; }
+    .glass-card {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 32px;
+      padding: 2.2rem 1.8rem;
+      transition: 0.4s ease;
+      height: 100%;
+    }
+    .glass-card:hover {
+      transform: translateY(-12px);
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(90, 160, 255, 0.2);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8);
+    }
+    .offer-card {
+      border-radius: 40px;
+      padding: 2.5rem 2rem;
+      background: rgba(20, 28, 58, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: 0.4s;
+      height: 100%;
+    }
+    .offer-card.premium {
+      background: linear-gradient(145deg, #18224a, #0f1638);
+      border: 1px solid rgba(90, 160, 255, 0.25);
+      box-shadow: 0 20px 50px -10px rgba(43,92,255,0.2);
+    }
+    .offer-card .price { font-size: 2.8rem; font-weight: 700; }
+    .pill-badge {
+      background: rgba(43, 92, 255, 0.18);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      color: #9abaff;
+    }
+    .ratio-circle {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: conic-gradient(#2b5cff 0% 70%, #1a254a 70% 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: 0 0 60px rgba(43,92,255,0.15);
+    }
+    .ratio-inner {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: #0b0d1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .ratio-inner span { font-size: 2.8rem; font-weight: 800; }
+    .bg-dark-soft { background: #0d1126; }
+
+    .step-item .day { font-weight: 700; color: #6d9aff; min-width: 70px; }
+
+    /* footer */
+    .footer-premium {
+      background: #060812;
+      border-top: 1px solid rgba(255,255,255,0.03);
+      padding: 50px 0 30px;
+    }
+    .footer-premium a { color: #9ab0e0; text-decoration: none; transition: 0.2s; }
+    .footer-premium a:hover { color: #fff; }
+
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      background: #25D366;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.35);
+      transition: 0.3s;
+      border: none;
+    }
+    .wa-float:hover { transform: scale(1.08); color:#fff; background:#1ebd5e; }
+
+    [data-aos] { pointer-events: none; }
+    [data-aos].aos-animate { pointer-events: auto; }
+
+    @media (max-width: 768px) {
+      .section-title { font-size: 2.2rem; }
+      .navbar-custom .nav-link { padding: 0.4rem 0.8rem !important; }
+      .hero { padding: 100px 0 60px; }
+      .ratio-circle { width: 140px; height: 140px; }
+      .ratio-inner { width: 110px; height: 110px; }
+      .ratio-inner span { font-size: 2.2rem; }
+      .lang-switch { top: 10px; right: 10px; font-size: 0.7rem; padding: 4px 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      [data-aos] { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SPLASH SCREEN (9.5 secondes) -->
+<div id="splash" role="status" aria-label="Chargement">
+  <!-- Logo modifié : utilisation du fichier 37E66D47-63A9-4FC0-9934-D1E26D2C3339.png -->
+  <img src="37E66D47-63A9-4FC0-9934-D1E26D2C3339.png" alt="AI Business Pro" class="logo-splash" width="150" height="150">
+  <h1>AI BUSINESS PRO</h1>
+  <div class="slogan">Former. Créer. Développer. Transformer.</div>
+</div>
+
+<!-- LANGUAGE SWITCH -->
+<div class="lang-switch" id="langSwitch">
+  <button class="active" data-lang="fr">FR</button>
+  <button data-lang="en">EN</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <!-- Logo modifié dans la navbar -->
+      <img src="37E66D47-63A9-4FC0-9934-D1E26D2C3339.png" alt="AI Business Pro" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" 
+            aria-controls="navMenu" aria-expanded="false" aria-label="Menu">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link active" href="#hero" data-i18n="nav.home">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="#mission" data-i18n="nav.about">À propos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#formation" data-i18n="nav.training">Formations</a></li>
+        <li class="nav-item"><a class="nav-link" href="#offres" data-i18n="nav.coaching">Accompagnement</a></li>
+        <li class="nav-item"><a class="nav-link" href="#entreprises" data-i18n="nav.business">Entreprises</a></li>
+        <li class="nav-item"><a class="nav-link" href="#recrutement" data-i18n="nav.recruit">Recrutement</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-7" data-aos="fade-up" data-aos-duration="1000">
+        <div class="mb-3"><span class="pill-badge" data-i18n="hero.badge">⚡ IA & business</span></div>
+        <h1 class="display-3 fw-bold" data-i18n="hero.title">Transformez l'intelligence artificielle en <span class="text-gradient">levier</span> pour votre entreprise.</h1>
+        <p class="lead mt-4 text-light-emphasis" style="font-size:1.2rem; color:#b6caf0;" data-i18n="hero.sub">
+          AI Business Pro accompagne les entrepreneurs, dirigeants et futurs créateurs d'entreprise dans l'utilisation pratique de l'IA pour créer, développer, optimiser et transformer leurs activités.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="#formation" class="btn btn-premium btn-lg" data-i18n="hero.btn1">Découvrir nos formations</a>
+          <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20obtenir%20des%20informations%20sur%20vos%20formations%20et%20vos%20offres%20d%27accompagnement." target="_blank" class="btn btn-outline-premium btn-lg"><i class="bi bi-whatsapp me-2"></i><span data-i18n="hero.btn2">Parler à un conseiller</span></a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left" data-aos-duration="1200">
+        <div class="text-center">
+          <div style="position:relative; width:100%; max-width:400px; margin:0 auto;">
+            <canvas id="heroCanvas" width="400" height="400" style="width:100%; height:auto; border-radius:40px; background:radial-gradient(circle at 30% 30%, #141d44, #030612); box-shadow:0 30px 80px rgba(0,0,0,0.7);"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section-pad bg-dark-soft" id="mission">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <span class="pill-badge" data-i18n="mission.badge">Notre mission</span>
+        <h2 class="section-title mt-2" data-i18n="mission.title">L'IA ne remplace pas l'entrepreneur. Elle <span class="text-gradient">amplifie</span> ses capacités.</h2>
+        <p class="lead" style="color:#bdd0f5;" data-i18n="mission.p1">AI Business Pro aide les entrepreneurs et les entreprises à transformer l'intelligence artificielle en outil concret de travail, de création, d'organisation et de croissance.</p>
+        <p style="color:#98aece;" data-i18n="mission.p2">Notre objectif n'est pas simplement d'apprendre à utiliser des outils d'IA. Nous apprenons à résoudre de vrais problèmes d'entreprise avec l'IA.</p>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="row g-3">
+          <div class="col-sm-6"><div class="glass-card text-center"><i class="bi bi-building fs-1 text-gradient-cyan"></i><h5 class="mt-2" data-i18n="mission.c1">Chefs d'entreprise</h5><p style="color:#b0c6ec;" data-i18n="mission.c1d">Optimisez votre entreprise grâce à l'IA.</p></div></div>
+          <div class="col-sm-6"><div class="glass-card text-center"><i class="bi bi-graph-up-arrow fs-1 text-gradient-cyan"></i><h5 class="mt-2" data-i18n="mission.c2">Entrepreneurs</h5><p style="color:#b0c6ec;" data-i18n="mission.c2d">Développez votre activité et gagnez en productivité.</p></div></div>
+          <div class="col-sm-6"><div class="glass-card text-center"><i class="bi bi-lightbulb fs-1 text-gradient-cyan"></i><h5 class="mt-2" data-i18n="mission.c3">Futurs entrepreneurs</h5><p style="color:#b0c6ec;" data-i18n="mission.c3d">Transformez votre idée en projet d'entreprise.</p></div></div>
+          <div class="col-sm-6"><div class="glass-card text-center"><i class="bi bi-people fs-1 text-gradient-cyan"></i><h5 class="mt-2" data-i18n="mission.c4">Entreprises & équipes</h5><p style="color:#b0c6ec;" data-i18n="mission.c4d">Formez vos collaborateurs et intégrez l'IA.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTHODE 70/30 -->
+<section class="section-pad" style="background:radial-gradient(circle at 20% 30%, #101838, #070a18);">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="pill-badge" data-i18n="method.badge">Notre méthode</span>
+      <h2 class="section-title" data-i18n="method.title">Apprendre en <span class="text-gradient">faisant</span>.</h2>
+      <p class="lead" style="color:#bdd0f5;" data-i18n="method.sub">70 % pratique · 30 % théorie · Simulations & cas réels</p>
+    </div>
+    <div class="row align-items-center mt-5 g-5">
+      <div class="col-md-6" data-aos="flip-up">
+        <div class="ratio-circle">
+          <div class="ratio-inner">
+            <span class="text-gradient">70%</span>
+            <small style="color:#8fb0f0;" data-i18n="method.practice">PRATIQUE</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <div class="glass-card" style="padding:2rem;">
+          <h4><i class="bi bi-check-circle-fill text-gradient-cyan me-2"></i><span data-i18n="method.item1">Exercices concrets</span></h4>
+          <p style="color:#b8cef5;" data-i18n="method.item1d">Chaque session est ancrée dans des simulations entrepreneuriales, des études de cas et des mises en situation réelles.</p>
+          <h4 class="mt-4"><i class="bi bi-check-circle-fill text-gradient-cyan me-2"></i><span data-i18n="method.item2">Projets personnalisés</span></h4>
+          <p style="color:#b8cef5;" data-i18n="method.item2d">Les participants travaillent sur leur propre entreprise ou sur des scénarios de création.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION 5 JOURS -->
+<section class="section-pad bg-dark-soft" id="formation">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="pill-badge" data-i18n="training.badge">Formation intensive</span>
+      <h2 class="section-title" data-i18n="training.title">5 jours pour transformer votre façon de travailler avec l'<span class="text-gradient">IA</span>.</h2>
+      <p class="lead" style="color:#bdd0f5;" data-i18n="training.sub">70% pratique · exercices réels · simulations · certificat · en ligne ou présentiel</p>
+    </div>
+    <div class="row mt-5 g-4">
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in"><div class="glass-card"><div class="day" data-i18n="training.d1">Jour 1</div><h5 data-i18n="training.d1t">Comprendre l'IA et identifier les opportunités</h5></div></div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100"><div class="glass-card"><div class="day" data-i18n="training.d2">Jour 2</div><h5 data-i18n="training.d2t">Construire son entreprise avec l'IA</h5></div></div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200"><div class="glass-card"><div class="day" data-i18n="training.d3">Jour 3</div><h5 data-i18n="training.d3t">Marketing, communication et acquisition</h5></div></div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300"><div class="glass-card"><div class="day" data-i18n="training.d4">Jour 4</div><h5 data-i18n="training.d4t">Organisation, productivité et automatisation</h5></div></div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400"><div class="glass-card"><div class="day" data-i18n="training.d5">Jour 5</div><h5 data-i18n="training.d5t">Simulation finale et présentation du projet</h5></div></div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="500"><div class="glass-card text-center"><i class="bi bi-award fs-1 text-gradient-cyan"></i><h5 data-i18n="training.cert">Certificat de formation</h5><p style="color:#b8cef5;">AI Business Pro</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULATION D'ENTREPRISE -->
+<section class="section-pad" style="background:#0b0f20;">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <span class="pill-badge" data-i18n="sim.badge">Simulation</span>
+        <h2 class="section-title" data-i18n="sim.title">Vous ne regardez pas l'entrepreneuriat. Vous le <span class="text-gradient">simulez</span>.</h2>
+        <p style="color:#b8cef5;" data-i18n="sim.p">Identifier une opportunité, analyser le marché, définir le client, créer l'offre, fixer un prix, construire une stratégie marketing, trouver les premiers clients, gérer les objections, réagir face à la concurrence…</p>
+        <div class="mt-4"><span class="pill-badge me-2" data-i18n="sim.tag1">Décisions</span><span class="pill-badge" data-i18n="sim.tag2">Stratégie</span><span class="pill-badge" data-i18n="sim.tag3">Croissance</span></div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="glass-card" style="padding:1.8rem; background:rgba(10,15,40,0.7);">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div><i class="bi bi-bullseye text-gradient-cyan"></i> <span data-i18n="sim.g1">Opportunité</span></div>
+            <div><i class="bi bi-bar-chart-fill text-gradient-cyan"></i> <span data-i18n="sim.g2">Marché</span></div>
+            <div><i class="bi bi-person-fill text-gradient-cyan"></i> <span data-i18n="sim.g3">Client</span></div>
+            <div><i class="bi bi-box-seam text-gradient-cyan"></i> <span data-i18n="sim.g4">Offre</span></div>
+            <div><i class="bi bi-tag-fill text-gradient-cyan"></i> <span data-i18n="sim.g5">Prix</span></div>
+            <div><i class="bi bi-megaphone-fill text-gradient-cyan"></i> <span data-i18n="sim.g6">Marketing</span></div>
+            <div><i class="bi bi-people-fill text-gradient-cyan"></i> <span data-i18n="sim.g7">Prospection</span></div>
+            <div><i class="bi bi-shield-check text-gradient-cyan"></i> <span data-i18n="sim.g8">Objections</span></div>
+          </div>
+          <hr style="border-color:#2a3a6a;">
+          <div class="text-center"><span class="pill-badge" data-i18n="sim.dash">Tableau de bord décisionnel</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRILLE COMPÉTENCES -->
+<section class="section-pad bg-dark-soft">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="pill-badge" data-i18n="skills.badge">Compétences</span>
+      <h2 class="section-title" data-i18n="skills.title">Ce que vous allez <span class="text-gradient">apprendre</span></h2>
+    </div>
+    <div class="row g-3 mt-4">
+      <div class="col-6 col-md-3" data-aos="fade-up"><div class="glass-card text-center py-3"><i class="bi bi-rocket-takeoff fs-2"></i><span class="d-block mt-1" data-i18n="skills.s1">Création d'entreprise</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="50"><div class="glass-card text-center py-3"><i class="bi bi-search fs-2"></i><span class="d-block mt-1" data-i18n="skills.s2">Étude de marché</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100"><div class="glass-card text-center py-3"><i class="bi bi-graph-up fs-2"></i><span class="d-block mt-1" data-i18n="skills.s3">Stratégie commerciale</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="150"><div class="glass-card text-center py-3"><i class="bi bi-megaphone fs-2"></i><span class="d-block mt-1" data-i18n="skills.s4">Marketing & contenu</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200"><div class="glass-card text-center py-3"><i class="bi bi-person-lines-fill fs-2"></i><span class="d-block mt-1" data-i18n="skills.s5">Prospection & vente</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="250"><div class="glass-card text-center py-3"><i class="bi bi-chat-dots fs-2"></i><span class="d-block mt-1" data-i18n="skills.s6">Service client</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300"><div class="glass-card text-center py-3"><i class="bi bi-diagram-3 fs-2"></i><span class="d-block mt-1" data-i18n="skills.s7">Automatisation</span></div></div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="350"><div class="glass-card text-center py-3"><i class="bi bi-robot fs-2"></i><span class="d-block mt-1" data-i18n="skills.s8">Assistants IA</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFRES -->
+<section class="section-pad" id="offres" style="background:#0b0d1a;">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="pill-badge" data-i18n="offers.badge">Nos offres</span>
+      <h2 class="section-title" data-i18n="offers.title">Des solutions pour chaque <span class="text-gradient">étape</span></h2>
+    </div>
+    <div class="row g-4 mt-5">
+      <div class="col-md-4" data-aos="flip-left">
+        <div class="offer-card">
+          <h3 data-i18n="offers.o1">FORMATION</h3>
+          <div class="price text-gradient-cyan">100 $</div>
+          <p class="text-light-emphasis" data-i18n="offers.o1from">À partir de</p>
+          <ul class="list-unstyled" style="color:#b0c6ec;">
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o1l1">5 jours intensifs</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o1l2">70% pratique</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o1l3">Simulations & exercices</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o1l4">Certificat</span></li>
+          </ul>
+          <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20formation%20de%205%20jours." target="_blank" class="btn btn-wa w-100 mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="offers.o1btn">Je suis intéressé</span></a>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="150">
+        <div class="offer-card">
+          <h3 data-i18n="offers.o2">ACCÉLÉRATION</h3>
+          <div class="price text-gradient-cyan">~750 $</div>
+          <ul class="list-unstyled" style="color:#b0c6ec;">
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o2l1">Formation 5 jours</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o2l2">Diagnostic personnalisé</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o2l3">Intégration IA & procédures</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o2l4">Stratégie marketing & commerciale</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o2l5">Suivi jusqu'à 60 jours</span></li>
+          </ul>
+          <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20discuter%20de%20l%27offre%20d%27accompagnement." target="_blank" class="btn btn-wa w-100 mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="offers.o2btn">Demander un accompagnement</span></a>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+        <div class="offer-card premium">
+          <span class="pill-badge" style="background:#3b6aff;" data-i18n="offers.o3badge">⭐ Recommandé</span>
+          <h3 data-i18n="offers.o3">CRÉATION & TRANSFORMATION</h3>
+          <div class="price text-gradient-cyan">~1 000 $</div>
+          <ul class="list-unstyled" style="color:#b0c6ec;">
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o3l1">Formation 5 jours</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o3l2">Diagnostic & étude de marché</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o3l3">Construction du projet & offre</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o3l4">Positionnement & stratégie</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o3l5">Outils numériques & IA</span></li>
+            <li><i class="bi bi-check-circle-fill text-gradient-cyan me-1"></i> <span data-i18n="offers.o3l6">Suivi jusqu'à 90 jours</span></li>
+          </ul>
+          <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20construire%20mon%20projet%20avec%20l%27offre%20Cr%C3%A9ation%20%26%20Transformation." target="_blank" class="btn btn-premium w-100 mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="offers.o3btn">Construire mon projet</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTREPRISES -->
+<section class="section-pad bg-dark-soft" id="entreprises">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7" data-aos="fade-right">
+        <span class="pill-badge" data-i18n="business.badge">Entreprises</span>
+        <h2 class="section-title" data-i18n="business.title">L'IA au service de vos <span class="text-gradient">équipes</span>.</h2>
+        <p style="color:#b8cef5;" data-i18n="business.p">AI Business Pro forme directement les entreprises : dirigeants, équipes marketing, vente, administration, productivité, automatisation et intégration de l'IA.</p>
+        <p class="mt-3"><span class="pill-badge" data-i18n="business.tag1">Sur devis</span> <span class="pill-badge" data-i18n="business.tag2">Personnalisé</span></p>
+        <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20obtenir%20une%20offre%20de%20formation%20pour%20mon%20entreprise." target="_blank" class="btn btn-premium mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="business.btn">Demander une offre entreprise</span></a>
+      </div>
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="glass-card"><i class="bi bi-building-fill fs-1 text-gradient-cyan"></i><h5 class="mt-2" data-i18n="business.cardtitle">Formation sur mesure</h5><p style="color:#b8cef5;" data-i18n="business.cardp">Les entreprises ayant des besoins spécifiques bénéficient d'une offre personnalisée sur devis.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÉSENTIEL + INTERNATIONAL -->
+<section class="section-pad" style="background:#0b0f20;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6" data-aos="fade-up">
+        <span class="pill-badge" data-i18n="onsite.badge">Présentiel</span>
+        <h2 class="section-title" data-i18n="onsite.title">Nous pouvons venir à <span class="text-gradient">vous</span>.</h2>
+        <p style="color:#b8cef5;" data-i18n="onsite.p">AI Business Pro organise des formations en présentiel à Kinshasa et peut intervenir dans d'autres villes selon les besoins du client.</p>
+        <div style="background:rgba(255,255,255,0.02); padding:1.5rem; border-radius:24px; border-left:3px solid #3b6aff;">
+          <p style="color:#b8cef5; font-size:0.95rem;"><i class="bi bi-info-circle me-2 text-gradient-cyan"></i><span data-i18n="onsite.note">Pour les déplacements, les frais (billet d'avion, hébergement, logistique) sont à la charge du client. Le paiement est dû avant le déplacement.</span></p>
+        </div>
+        <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20organiser%20une%20formation%20dans%20ma%20ville." target="_blank" class="btn btn-outline-premium mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="onsite.btn">Organiser une formation</span></a>
+      </div>
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <span class="pill-badge" data-i18n="intl.badge">International</span>
+        <h2 class="section-title" data-i18n="intl.title">Une expertise qui dépasse les <span class="text-gradient">frontières</span>.</h2>
+        <p style="color:#b8cef5;" data-i18n="intl.p">Formations en français et en anglais, avec des experts francophones et anglophones spécialisés en IA, entrepreneuriat et technologies.</p>
+        <div class="d-flex gap-3 mt-4">
+          <span class="pill-badge" style="font-size:1.1rem; padding:10px 24px;"><i class="bi bi-translate me-1"></i> FRANÇAIS</span>
+          <span class="pill-badge" style="font-size:1.1rem; padding:10px 24px; background:rgba(90,160,255,0.15);"><i class="bi bi-translate me-1"></i> ENGLISH</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUTEMENT -->
+<section class="section-pad bg-dark-soft" id="recrutement">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7" data-aos="fade-right">
+        <span class="pill-badge" data-i18n="recruit.badge">Recrutement</span>
+        <h2 class="section-title" data-i18n="recruit.title">Grandir, c'est aussi trouver les <span class="text-gradient">bonnes personnes</span>.</h2>
+        <p style="color:#b8cef5;" data-i18n="recruit.p">AI Business Pro propose un service de recherche et présélection de talents : définition du profil, rédaction d'offre, recherche, tri des CV, entretiens préliminaires, tests et présentation des candidats.</p>
+        <div class="mt-3"><span class="pill-badge" data-i18n="recruit.tag1">Facturé à l'employeur</span><span class="pill-badge ms-2" data-i18n="recruit.tag2">Respect des réglementations</span></div>
+        <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20discuter%20d%27un%20besoin%20de%20recrutement." target="_blank" class="btn btn-premium mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="recruit.btn">Trouver un talent</span></a>
+      </div>
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="glass-card"><i class="bi bi-people-fill fs-1 text-gradient-cyan"></i><h5 class="mt-2" data-i18n="recruit.cardtitle">Service de présélection</h5><p style="color:#b8cef5;" data-i18n="recruit.cardp">Le service est facturé à l'employeur et non au candidat. Conforme à la réglementation en RDC.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÉCOSYSTÈME -->
+<section class="section-pad" style="background:#060a18;">
+  <div class="container text-center" data-aos="fade-up">
+    <span class="pill-badge" data-i18n="eco.badge">Écosystème</span>
+    <h2 class="section-title" data-i18n="eco.title">Former → Créer → Développer → <span class="text-gradient">Transformer</span> → Recruter</h2>
+    <p style="color:#b8cef5; max-width:700px; margin:0 auto;" data-i18n="eco.p">AI Business Pro construit un écosystème complet pour accompagner les entrepreneurs depuis l'apprentissage jusqu'au développement de leur entreprise.</p>
+    <div class="d-flex flex-wrap justify-content-center gap-4 mt-5">
+      <div class="glass-card" style="width:160px;"><i class="bi bi-mortarboard fs-1"></i><h6 data-i18n="eco.step1">Former</h6></div>
+      <div class="glass-card" style="width:160px;"><i class="bi bi-rocket fs-1"></i><h6 data-i18n="eco.step2">Créer</h6></div>
+      <div class="glass-card" style="width:160px;"><i class="bi bi-graph-up fs-1"></i><h6 data-i18n="eco.step3">Développer</h6></div>
+      <div class="glass-card" style="width:160px;"><i class="bi bi-arrow-repeat fs-1"></i><h6 data-i18n="eco.step4">Transformer</h6></div>
+      <div class="glass-card" style="width:160px;"><i class="bi bi-person-plus fs-1"></i><h6 data-i18n="eco.step5">Recruter</h6></div>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI AI BUSINESS PRO -->
+<section class="section-pad bg-dark-soft">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up"><span class="pill-badge" data-i18n="why.badge">Pourquoi nous</span><h2 class="section-title" data-i18n="why.title">Des atouts <span class="text-gradient">concrets</span></h2></div>
+    <div class="row g-3 mt-4">
+      <div class="col-6 col-md-3" data-aos="zoom-in"><div class="glass-card text-center py-3"><i class="bi bi-percent fs-2 text-gradient-cyan"></i><span class="d-block" data-i18n="why.w1">70 % pratique</span></div></div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="50"><div class="glass-card text-center py-3"><i class="bi bi-calendar-week fs-2 text-gradient-cyan"></i><span class="d-block" data-i18n="why.w2">5 jours intensifs</span></div></div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100"><div class="glass-card text-center py-3"><i class="bi bi-person-check fs-2 text-gradient-cyan"></i><span class="d-block" data-i18n="why.w3">Accompagnement perso</span></div></div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="150"><div class="glass-card text-center py-3"><i class="bi bi-laptop fs-2 text-gradient-cyan"></i><span class="d-block" data-i18n="why.w4">En ligne ou présentiel</span></div></div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200"><div class="glass-card text-center py-3"><i class="bi bi-globe2 fs-2 text-gradient-cyan"></i><span class="d-block" data-i18n="why.w5">Français & English</span></div></div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="250"><div class="glass-card text-center py-3"><i class="bi bi-trophy fs-2 text-gradient-cyan"></i><span class="d-block" data-i18n="why.w6">Résultats concrets</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES (placeholders) -->
+<section class="section-pad" style="background:#0b0f20;">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up"><span class="pill-badge" data-i18n="testi.badge">Témoignages</span><h2 class="section-title" data-i18n="testi.title">Ce que nos participants <span class="text-gradient">disent</span></h2></div>
+    <div class="row g-4 mt-4">
+      <div class="col-md-4" data-aos="fade-up"><div class="glass-card text-center" style="padding:2rem;"><i class="bi bi-chat-quote fs-1 text-gradient-cyan"></i><p class="mt-3" style="color:#b8cef5;" data-i18n="testi.t1">« Votre témoignage pourrait apparaître ici. »</p><span class="pill-badge" data-i18n="testi.auth1">— Participant</span></div></div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="glass-card text-center" style="padding:2rem;"><i class="bi bi-chat-quote fs-1 text-gradient-cyan"></i><p class="mt-3" style="color:#b8cef5;" data-i18n="testi.t2">« Votre témoignage pourrait apparaître ici. »</p><span class="pill-badge" data-i18n="testi.auth2">— Entrepreneur</span></div></div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="glass-card text-center" style="padding:2rem;"><i class="bi bi-chat-quote fs-1 text-gradient-cyan"></i><p class="mt-3" style="color:#b8cef5;" data-i18n="testi.t3">« Votre témoignage pourrait apparaître ici. »</p><span class="pill-badge" data-i18n="testi.auth3">— Dirigeant</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-pad bg-dark-soft" id="faq">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up"><span class="pill-badge" data-i18n="faq.badge">FAQ</span><h2 class="section-title" data-i18n="faq.title">Questions <span class="text-gradient">fréquentes</span></h2></div>
+    <div class="accordion accordion-flush mt-5" id="faqAccordion" style="max-width:900px; margin:0 auto;">
+      <div class="accordion-item bg-transparent border-0 border-bottom border-secondary" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq1" data-i18n="faq.q1">Combien de temps dure la formation ?</button></h2>
+        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a1">La formation principale dure 5 jours maximum.</div></div>
+      </div>
+      <div class="accordion-item bg-transparent border-0 border-bottom border-secondary" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq2" data-i18n="faq.q2">Est-elle disponible en ligne ?</button></h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a2">Oui. Les formations peuvent être suivies en ligne ou en présentiel.</div></div>
+      </div>
+      <div class="accordion-item bg-transparent border-0 border-bottom border-secondary" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq3" data-i18n="faq.q3">Pouvez-vous vous déplacer dans une autre ville ?</button></h2>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a3">Oui, selon conditions. Les frais de déplacement et hébergement sont à la charge du client. Paiement avant déplacement.</div></div>
+      </div>
+      <div class="accordion-item bg-transparent border-0 border-bottom border-secondary" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq4" data-i18n="faq.q4">La formation est-elle uniquement en français ?</button></h2>
+        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a4">Non. Des formations en français et en anglais peuvent être proposées.</div></div>
+      </div>
+      <div class="accordion-item bg-transparent border-0 border-bottom border-secondary" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq5" data-i18n="faq.q5">Peut-on être accompagné pour créer une entreprise ?</button></h2>
+        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a5">Oui. L'offre Création & Transformation est conçue pour accompagner le participant dans la structuration et le lancement de son projet.</div></div>
+      </div>
+      <div class="accordion-item bg-transparent border-0 border-bottom border-secondary" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq6" data-i18n="faq.q6">Les entreprises peuvent-elles former leurs employés ?</button></h2>
+        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a6">Oui. Des formations personnalisées pour entreprises sont disponibles sur devis.</div></div>
+      </div>
+      <div class="accordion-item bg-transparent border-0" style="border-color:#2a3a6a;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed bg-transparent text-light" data-bs-toggle="collapse" data-bs-target="#faq7" data-i18n="faq.q7">Faites-vous du recrutement ?</button></h2>
+        <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body text-light-emphasis" data-i18n="faq.a7">AI Business Pro prévoit un service de recherche et présélection de talents pour les entreprises, dans le respect du cadre légal.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section-pad" style="background:radial-gradient(circle at 30% 30%, #141d44, #030612);">
+  <div class="container text-center" data-aos="zoom-in">
+    <span class="pill-badge" data-i18n="cta.badge">Prêt à passer à l'action</span>
+    <h2 class="section-title mt-2" data-i18n="cta.title">Votre entreprise peut faire plus avec <span class="text-gradient">l'IA</span>.</h2>
+    <p class="lead" style="color:#bdd0f5;" data-i18n="cta.sub">Commencez par une conversation.</p>
+    <a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20obtenir%20des%20informations%20sur%20vos%20formations%20et%20vos%20offres%20d%27accompagnement." target="_blank" class="btn btn-premium btn-lg mt-3"><i class="bi bi-whatsapp me-2"></i><span data-i18n="cta.btn">Parler à AI Business Pro</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-premium">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-md-4">
+        <!-- Logo modifié dans le footer -->
+        <img src="37E66D47-63A9-4FC0-9934-D1E26D2C3339.png" alt="AI Business Pro" height="36" class="mb-2">
+        <div class="text-light-emphasis" style="font-weight:300; letter-spacing:1px;" data-i18n="footer.slogan">Former. Créer. Développer. Transformer.</div>
+        <p class="mt-2" style="color:#7a92c0; font-size:0.9rem;" data-i18n="footer.location">Kinshasa, République démocratique du Congo</p>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#hero" data-i18n="nav.home">Accueil</a>
+          <a href="#mission" data-i18n="nav.about">À propos</a>
+          <a href="#formation" data-i18n="nav.training">Formations</a>
+          <a href="#offres" data-i18n="nav.coaching">Accompagnement</a>
+          <a href="#entreprises" data-i18n="nav.business">Entreprises</a>
+          <a href="#recrutement" data-i18n="nav.recruit">Recrutement</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end">
+        <a href="https://wa.me/243985245786" target="_blank" class="btn btn-wa btn-sm"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+      </div>
+    </div>
+    <hr style="border-color:#1f2a4a; margin:30px 0 20px;">
+    <div class="d-flex flex-wrap justify-content-between align-items-center" style="color:#5f78a8; font-size:0.9rem;">
+      <span>© 2026 AI Business Pro. Tous droits réservés.</span>
+      <span>Site créé par Christian N. MANDEMBA</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/243985245786?text=Bonjour%20AI%20Business%20Pro%2C%20je%20souhaite%20obtenir%20des%20informations." target="_blank" class="wa-float" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+
+<!-- BOOTSTRAP + AOS + GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script>
+  (function(){
+    // SPLASH : 9.5 secondes
+    const splash = document.getElementById('splash');
+    if (splash) {
+      setTimeout(() => {
+        splash.classList.add('hide');
+      }, 9500);
+    }
+
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out-cubic',
+      mirror: false,
+    });
+
+    const nav = document.querySelector('.navbar-custom');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Hero canvas
+    const canvas = document.getElementById('heroCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = 400, h = canvas.height = 400;
+      const particles = [];
+      for (let i=0; i<60; i++) {
+        particles.push({
+          x: Math.random()*w, y: Math.random()*h,
+          r: 1.5+Math.random()*3,
+          dx: (Math.random()-0.5)*0.6,
+          dy: (Math.random()-0.5)*0.6,
+          alpha: 0.2+Math.random()*0.5
+        });
+      }
+      function drawParticles() {
+        ctx.clearRect(0,0,w,h);
+        const grad = ctx.createRadialGradient(180,180,20,200,200,300);
+        grad.addColorStop(0,'#1e2f6a');
+        grad.addColorStop(1,'#050812');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0,0,w,h);
+        particles.forEach(p => {
+          p.x += p.dx; p.y += p.dy;
+          if(p.x<0||p.x>w) p.dx*=-1;
+          if(p.y<0||p.y>h) p.dy*=-1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(100, 180, 255, ${p.alpha*0.6})`;
+          ctx.fill();
+          for (let j=0; j<particles.length; j++) {
+            const o = particles[j];
+            const dx = p.x-o.x, dy = p.y-o.y;
+            if (Math.hypot(dx,dy) < 80) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(o.x, o.y);
+              ctx.strokeStyle = `rgba(80, 160, 255, ${0.08 * (1 - Math.hypot(dx,dy)/80)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        });
+        requestAnimationFrame(drawParticles);
+      }
+      drawParticles();
+    }
+
+    // Menu mobile
+    const navLinks = document.querySelectorAll('#navMenu .nav-link');
+    const navCollapse = document.getElementById('navMenu');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 992 && navCollapse.classList.contains('show')) {
+          const bsCollapse = new bootstrap.Collapse(navCollapse, { toggle: false });
+          bsCollapse.hide();
+        }
+      });
+    });
+
+    // ----- TRADUCTION FR/EN -----
+    const translations = {
+      fr: {
+        'nav.home': 'Accueil','nav.about':'À propos','nav.training':'Formations','nav.coaching':'Accompagnement',
+        'nav.business':'Entreprises','nav.recruit':'Recrutement','nav.contact':'Contact',
+        'hero.badge':'⚡ IA & business','hero.title':'Transformez l\'intelligence artificielle en <span class="text-gradient">levier</span> pour votre entreprise.',
+        'hero.sub':'AI Business Pro accompagne les entrepreneurs, dirigeants et futurs créateurs d\'entreprise dans l\'utilisation pratique de l\'IA pour créer, développer, optimiser et transformer leurs activités.',
+        'hero.btn1':'Découvrir nos formations','hero.btn2':'Parler à un conseiller',
+        'mission.badge':'Notre mission','mission.title':'L\'IA ne remplace pas l\'entrepreneur. Elle <span class="text-gradient">amplifie</span> ses capacités.',
+        'mission.p1':'AI Business Pro aide les entrepreneurs et les entreprises à transformer l\'intelligence artificielle en outil concret de travail, de création, d\'organisation et de croissance.',
+        'mission.p2':'Notre objectif n\'est pas simplement d\'apprendre à utiliser des outils d\'IA. Nous apprenons à résoudre de vrais problèmes d\'entreprise avec l\'IA.',
+        'mission.c1':'Chefs d\'entreprise','mission.c1d':'Optimisez votre entreprise grâce à l\'IA.',
+        'mission.c2':'Entrepreneurs','mission.c2d':'Développez votre activité et gagnez en productivité.',
+        'mission.c3':'Futurs entrepreneurs','mission.c3d':'Transformez votre idée en projet d\'entreprise.',
+        'mission.c4':'Entreprises & équipes','mission.c4d':'Formez vos collaborateurs et intégrez l\'IA.',
+        'method.badge':'Notre méthode','method.title':'Apprendre en <span class="text-gradient">faisant</span>.',
+        'method.sub':'70 % pratique · 30 % théorie · Simulations & cas réels','method.practice':'PRATIQUE',
+        'method.item1':'Exercices concrets','method.item1d':'Chaque session est ancrée dans des simulations entrepreneuriales, des études de cas et des mises en situation réelles.',
+        'method.item2':'Projets personnalisés','method.item2d':'Les participants travaillent sur leur propre entreprise ou sur des scénarios de création.',
+        'training.badge':'Formation intensive','training.title':'5 jours pour transformer votre façon de travailler avec l\'<span class="text-gradient">IA</span>.',
+        'training.sub':'70% pratique · exercices réels · simulations · certificat · en ligne ou présentiel',
+        'training.d1':'Jour 1','training.d1t':'Comprendre l\'IA et identifier les opportunités',
+        'training.d2':'Jour 2','training.d2t':'Construire son entreprise avec l\'IA',
+        'training.d3':'Jour 3','training.d3t':'Marketing, communication et acquisition',
+        'training.d4':'Jour 4','training.d4t':'Organisation, productivité et automatisation',
+        'training.d5':'Jour 5','training.d5t':'Simulation finale et présentation du projet',
+        'training.cert':'Certificat de formation',
+        'sim.badge':'Simulation','sim.title':'Vous ne regardez pas l\'entrepreneuriat. Vous le <span class="text-gradient">simulez</span>.',
+        'sim.p':'Identifier une opportunité, analyser le marché, définir le client, créer l\'offre, fixer un prix, construire une stratégie marketing, trouver les premiers clients, gérer les objections, réagir face à la concurrence…',
+        'sim.tag1':'Décisions','sim.tag2':'Stratégie','sim.tag3':'Croissance',
+        'sim.g1':'Opportunité','sim.g2':'Marché','sim.g3':'Client','sim.g4':'Offre','sim.g5':'Prix','sim.g6':'Marketing','sim.g7':'Prospection','sim.g8':'Objections','sim.dash':'Tableau de bord décisionnel',
+        'skills.badge':'Compétences','skills.title':'Ce que vous allez <span class="text-gradient">apprendre</span>',
+        'skills.s1':'Création d\'entreprise','skills.s2':'Étude de marché','skills.s3':'Stratégie commerciale','skills.s4':'Marketing & contenu',
+        'skills.s5':'Prospection & vente','skills.s6':'Service client','skills.s7':'Automatisation','skills.s8':'Assistants IA',
+        'offers.badge':'Nos offres','offers.title':'Des solutions pour chaque <span class="text-gradient">étape</span>',
+        'offers.o1':'FORMATION','offers.o1from':'À partir de','offers.o1l1':'5 jours intensifs','offers.o1l2':'70% pratique','offers.o1l3':'Simulations & exercices','offers.o1l4':'Certificat','offers.o1btn':'Je suis intéressé',
+        'offers.o2':'ACCÉLÉRATION','offers.o2l1':'Formation 5 jours','offers.o2l2':'Diagnostic personnalisé','offers.o2l3':'Intégration IA & procédures','offers.o2l4':'Stratégie marketing & commerciale','offers.o2l5':'Suivi jusqu\'à 60 jours','offers.o2btn':'Demander un accompagnement',
+        'offers.o3':'CRÉATION & TRANSFORMATION','offers.o3badge':'⭐ Recommandé','offers.o3l1':'Formation 5 jours','offers.o3l2':'Diagnostic & étude de marché','offers.o3l3':'Construction du projet & offre','offers.o3l4':'Positionnement & stratégie','offers.o3l5':'Outils numériques & IA','offers.o3l6':'Suivi jusqu\'à 90 jours','offers.o3btn':'Construire mon projet',
+        'business.badge':'Entreprises','business.title':'L\'IA au service de vos <span class="text-gradient">équipes</span>.',
+        'business.p':'AI Business Pro forme directement les entreprises : dirigeants, équipes marketing, vente, administration, productivité, automatisation et intégration de l\'IA.',
+        'business.tag1':'Sur devis','business.tag2':'Personnalisé','business.btn':'Demander une offre entreprise',
+        'business.cardtitle':'Formation sur mesure','business.cardp':'Les entreprises ayant des besoins spécifiques bénéficient d\'une offre personnalisée sur devis.',
+        'onsite.badge':'Présentiel','onsite.title':'Nous pouvons venir à <span class="text-gradient">vous</span>.',
+        'onsite.p':'AI Business Pro organise des formations en présentiel à Kinshasa et peut intervenir dans d\'autres villes selon les besoins du client.',
+        'onsite.note':'Pour les déplacements, les frais (billet d\'avion, hébergement, logistique) sont à la charge du client. Le paiement est dû avant le déplacement.',
+        'onsite.btn':'Organiser une formation',
+        'intl.badge':'International','intl.title':'Une expertise qui dépasse les <span class="text-gradient">frontières</span>.',
+        'intl.p':'Formations en français et en anglais, avec des experts francophones et anglophones spécialisés en IA, entrepreneuriat et technologies.',
+        'recruit.badge':'Recrutement','recruit.title':'Grandir, c\'est aussi trouver les <span class="text-gradient">bonnes personnes</span>.',
+        'recruit.p':'AI Business Pro propose un service de recherche et présélection de talents : définition du profil, rédaction d\'offre, recherche, tri des CV, entretiens préliminaires, tests et présentation des candidats.',
+        'recruit.tag1':'Facturé à l\'employeur','recruit.tag2':'Respect des réglementations','recruit.btn':'Trouver un talent',
+        'recruit.cardtitle':'Service de présélection','recruit.cardp':'Le service est facturé à l\'employeur et non au candidat. Conforme à la réglementation en RDC.',
+        'eco.badge':'Écosystème','eco.title':'Former → Créer → Développer → <span class="text-gradient">Transformer</span> → Recruter',
+        'eco.p':'AI Business Pro construit un écosystème complet pour accompagner les entrepreneurs depuis l\'apprentissage jusqu\'au développement de leur entreprise.',
+        'eco.step1':'Former','eco.step2':'Créer','eco.step3':'Développer','eco.step4':'Transformer','eco.step5':'Recruter',
+        'why.badge':'Pourquoi nous','why.title':'Des atouts <span class="text-gradient">concrets</span>',
+        'why.w1':'70 % pratique','why.w2':'5 jours intensifs','why.w3':'Accompagnement perso','why.w4':'En ligne ou présentiel','why.w5':'Français & English','why.w6':'Résultats concrets',
+        'testi.badge':'Témoignages','testi.title':'Ce que nos participants <span class="text-gradient">disent</span>',
+        'testi.t1':'« Votre témoignage pourrait apparaître ici. »','testi.auth1':'— Participant',
+        'testi.t2':'« Votre témoignage pourrait apparaître ici. »','testi.auth2':'— Entrepreneur',
+        'testi.t3':'« Votre témoignage pourrait apparaître ici. »','testi.auth3':'— Dirigeant',
+        'faq.badge':'FAQ','faq.title':'Questions <span class="text-gradient">fréquentes</span>',
+        'faq.q1':'Combien de temps dure la formation ?','faq.a1':'La formation principale dure 5 jours maximum.',
+        'faq.q2':'Est-elle disponible en ligne ?','faq.a2':'Oui. Les formations peuvent être suivies en ligne ou en présentiel.',
+        'faq.q3':'Pouvez-vous vous déplacer dans une autre ville ?','faq.a3':'Oui, selon conditions. Les frais de déplacement et hébergement sont à la charge du client. Paiement avant déplacement.',
+        'faq.q4':'La formation est-elle uniquement en français ?','faq.a4':'Non. Des formations en français et en anglais peuvent être proposées.',
+        'faq.q5':'Peut-on être accompagné pour créer une entreprise ?','faq.a5':'Oui. L\'offre Création & Transformation est conçue pour accompagner le participant dans la structuration et le lancement de son projet.',
+        'faq.q6':'Les entreprises peuvent-elles former leurs employés ?','faq.a6':'Oui. Des formations personnalisées pour entreprises sont disponibles sur devis.',
+        'faq.q7':'Faites-vous du recrutement ?','faq.a7':'AI Business Pro prévoit un service de recherche et présélection de talents pour les entreprises, dans le respect du cadre légal.',
+        'cta.badge':'Prêt à passer à l\'action','cta.title':'Votre entreprise peut faire plus avec <span class="text-gradient">l\'IA</span>.',
+        'cta.sub':'Commencez par une conversation.','cta.btn':'Parler à AI Business Pro',
+        'footer.slogan':'Former. Créer. Développer. Transformer.','footer.location':'Kinshasa, République démocratique du Congo'
+      },
+      en: {
+        'nav.home':'Home','nav.about':'About','nav.training':'Training','nav.coaching':'Coaching',
+        'nav.business':'Business','nav.recruit':'Recruitment','nav.contact':'Contact',
+        'hero.badge':'⚡ AI & business','hero.title':'Turn artificial intelligence into a <span class="text-gradient">lever</span> for your business.',
+        'hero.sub':'AI Business Pro supports entrepreneurs, executives and future business creators in the practical use of AI to create, develop, optimize and transform their activities.',
+        'hero.btn1':'Discover our trainings','hero.btn2':'Speak to an advisor',
+        'mission.badge':'Our mission','mission.title':'AI doesn\'t replace the entrepreneur. It <span class="text-gradient">amplifies</span> their capabilities.',
+        'mission.p1':'AI Business Pro helps entrepreneurs and companies turn AI into a concrete tool for work, creation, organization and growth.',
+        'mission.p2':'Our goal is not just to learn how to use AI tools. We learn to solve real business problems with AI.',
+        'mission.c1':'Business leaders','mission.c1d':'Optimize your company with AI.',
+        'mission.c2':'Entrepreneurs','mission.c2d':'Grow your business and boost productivity.',
+        'mission.c3':'Future entrepreneurs','mission.c3d':'Turn your idea into a business project.',
+        'mission.c4':'Companies & teams','mission.c4d':'Train your staff and integrate AI.',
+        'method.badge':'Our method','method.title':'Learn by <span class="text-gradient">doing</span>.',
+        'method.sub':'70% practice · 30% theory · Simulations & real cases','method.practice':'PRACTICE',
+        'method.item1':'Concrete exercises','method.item1d':'Each session is rooted in entrepreneurial simulations, case studies and real-life situations.',
+        'method.item2':'Custom projects','method.item2d':'Participants work on their own business or creation scenarios.',
+        'training.badge':'Intensive training','training.title':'5 days to transform the way you work with <span class="text-gradient">AI</span>.',
+        'training.sub':'70% practice · real exercises · simulations · certificate · online or onsite',
+        'training.d1':'Day 1','training.d1t':'Understand AI and identify opportunities',
+        'training.d2':'Day 2','training.d2t':'Build your business with AI',
+        'training.d3':'Day 3','training.d3t':'Marketing, communication and acquisition',
+        'training.d4':'Day 4','training.d4t':'Organization, productivity and automation',
+        'training.d5':'Day 5','training.d5t':'Final simulation and project presentation',
+        'training.cert':'Training certificate',
+        'sim.badge':'Simulation','sim.title':'You don\'t just watch entrepreneurship. You <span class="text-gradient">simulate</span> it.',
+        'sim.p':'Identify an opportunity, analyze the market, define the customer, create the offer, set a price, build a marketing strategy, find first customers, handle objections, react to competition…',
+        'sim.tag1':'Decisions','sim.tag2':'Strategy','sim.tag3':'Growth',
+        'sim.g1':'Opportunity','sim.g2':'Market','sim.g3':'Customer','sim.g4':'Offer','sim.g5':'Price','sim.g6':'Marketing','sim.g7':'Prospecting','sim.g8':'Objections','sim.dash':'Decision dashboard',
+        'skills.badge':'Skills','skills.title':'What you will <span class="text-gradient">learn</span>',
+        'skills.s1':'Business creation','skills.s2':'Market research','skills.s3':'Commercial strategy','skills.s4':'Marketing & content',
+        'skills.s5':'Prospecting & sales','skills.s6':'Customer service','skills.s7':'Automation','skills.s8':'AI assistants',
+        'offers.badge':'Our offers','offers.title':'Solutions for every <span class="text-gradient">stage</span>',
+        'offers.o1':'TRAINING','offers.o1from':'Starting at','offers.o1l1':'5 intensive days','offers.o1l2':'70% practice','offers.o1l3':'Simulations & exercises','offers.o1l4':'Certificate','offers.o1btn':'I\'m interested',
+        'offers.o2':'ACCELERATION','offers.o2l1':'5-day training','offers.o2l2':'Custom diagnosis','offers.o2l3':'AI integration & procedures','offers.o2l4':'Marketing & sales strategy','offers.o2l5':'Follow-up up to 60 days','offers.o2btn':'Request coaching',
+        'offers.o3':'CREATION & TRANSFORMATION','offers.o3badge':'⭐ Recommended','offers.o3l1':'5-day training','offers.o3l2':'Diagnosis & market study','offers.o3l3':'Project & offer building','offers.o3l4':'Positioning & strategy','offers.o3l5':'Digital tools & AI','offers.o3l6':'Follow-up up to 90 days','offers.o3btn':'Build my project',
+        'business.badge':'Business','business.title':'AI at the service of your <span class="text-gradient">teams</span>.',
+        'business.p':'AI Business Pro trains companies directly: leaders, marketing, sales, administration, productivity, automation and AI integration.',
+        'business.tag1':'Quote-based','business.tag2':'Custom','business.btn':'Request a company offer',
+        'business.cardtitle':'Tailored training','business.cardp':'Companies with specific needs get a custom quote-based offer.',
+        'onsite.badge':'Onsite','onsite.title':'We can come to <span class="text-gradient">you</span>.',
+        'onsite.p':'AI Business Pro organizes onsite trainings in Kinshasa and can also travel to other cities upon client request.',
+        'onsite.note':'For travel, expenses (flight, accommodation, logistics) are borne by the client. Payment is due before travel.',
+        'onsite.btn':'Organize a training in my city',
+        'intl.badge':'International','intl.title':'Expertise beyond <span class="text-gradient">borders</span>.',
+        'intl.p':'Trainings in French and English, with French-speaking and English-speaking experts specialized in AI, entrepreneurship and technology.',
+        'recruit.badge':'Recruitment','recruit.title':'Growing also means finding the <span class="text-gradient">right people</span>.',
+        'recruit.p':'AI Business Pro offers a talent search and pre-selection service: profile definition, offer writing, search, CV screening, preliminary interviews, tests and candidate presentation.',
+        'recruit.tag1':'Billed to employer','recruit.tag2':'Regulatory compliant','recruit.btn':'Find a talent',
+        'recruit.cardtitle':'Pre-selection service','recruit.cardp':'The service is billed to the employer, not the candidate. Compliant with DRC regulations.',
+        'eco.badge':'Ecosystem','eco.title':'Train → Create → Develop → <span class="text-gradient">Transform</span> → Recruit',
+        'eco.p':'AI Business Pro builds a complete ecosystem to support entrepreneurs from learning to business development.',
+        'eco.step1':'Train','eco.step2':'Create','eco.step3':'Develop','eco.step4':'Transform','eco.step5':'Recruit',
+        'why.badge':'Why us','why.title':'Concrete <span class="text-gradient">assets</span>',
+        'why.w1':'70% practice','why.w2':'5 intensive days','why.w3':'Personal coaching','why.w4':'Online or onsite','why.w5':'French & English','why.w6':'Concrete results',
+        'testi.badge':'Testimonials','testi.title':'What our participants <span class="text-gradient">say</span>',
+        'testi.t1':'« Your testimonial could appear here. »','testi.auth1':'— Participant',
+        'testi.t2':'« Your testimonial could appear here. »','testi.auth2':'— Entrepreneur',
+        'testi.t3':'« Your testimonial could appear here. »','testi.auth3':'— Executive',
+        'faq.badge':'FAQ','faq.title':'Frequently asked <span class="text-gradient">questions</span>',
+        'faq.q1':'How long is the training?','faq.a1':'The main training lasts up to 5 days.',
+        'faq.q2':'Is it available online?','faq.a2':'Yes. Trainings can be taken online or onsite.',
+        'faq.q3':'Can you travel to another city?','faq.a3':'Yes, under agreed conditions. Travel and accommodation costs are borne by the client. Payment before travel.',
+        'faq.q4':'Is the training only in French?','faq.a4':'No. Trainings can be delivered in French and English.',
+        'faq.q5':'Can I get support to create a business?','faq.a5':'Yes. Our Creation & Transformation offer is designed to support you in structuring and launching your project.',
+        'faq.q6':'Can companies train their employees?','faq.a6':'Yes. Custom corporate trainings are available upon quote.',
+        'faq.q7':'Do you do recruitment?','faq.a7':'AI Business Pro plans a talent search and pre-selection service for companies, in compliance with applicable regulations.',
+        'cta.badge':'Ready to act','cta.title':'Your business can achieve more with <span class="text-gradient">AI</span>.',
+        'cta.sub':'Start with a conversation.','cta.btn':'Speak to AI Business Pro',
+        'footer.slogan':'Train. Create. Develop. Transform.','footer.location':'Kinshasa, Democratic Republic of the Congo'
+      }
+    };
+
+    let currentLang = 'fr';
+    const langButtons = document.querySelectorAll('#langSwitch button');
+    const i18nElements = document.querySelectorAll('[data-i18n]');
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      i18nElements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translation = translations[lang] && translations[lang][key] ? translations[lang][key] : key;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = translation;
+        } else {
+          el.innerHTML = translation;
+        }
+      });
+      langButtons.forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`#langSwitch button[data-lang="${lang}"]`)?.classList.add('active');
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        applyLanguage(lang);
+      });
+    });
+
+    applyLanguage('fr');
+
+    console.log('AI Business Pro · logo mis à jour : 37E66D47-63A9-4FC0-9934-D1E26D2C3339.png');
+  })();
+</script>
+</body>
+</html>
